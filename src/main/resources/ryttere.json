@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "navn": "Padej Tangocar",
+    "lag": "ABC",
+    "pris": 13.5,
+    "rolle": "Lagkaptein",
+    "poeng": 0
+  },
+  {
+    "id": 2,
+    "navn": "Vonas Jinglegaard",
+    "lag": "Team Dumbo Vimsat",
+    "pris": 11,
+    "rolle": "Lagkaptein",
+    "poeng": 0
+  }
+]
