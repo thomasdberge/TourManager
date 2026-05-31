@@ -32,12 +32,20 @@ public class Main {
             Rytter onsketRytter2 = alleRyttere.get(1);
             mittlag.kjopRytter(onsketRytter2);
 
-            mittlag.selgRytter(onsketRytter1);
+            mittlag.selgRytter(onsketRytter2);
 
             Rytter onsketRytter3 = alleRyttere.get(2);
             mittlag.kjopRytter(onsketRytter3);
 
             mittlag.printLagStatus();
+
+            System.out.println("\n--- SIMULERER ETAPPE 1 ---");
+
+            onsketRytter1.setPoeng(100);
+            onsketRytter3.setPoeng(50);
+
+            int lagetsScore = mittlag.beregnPoeng();
+            System.out.println("\nTotale poeng for " + mittlag.managerNavn + " etter Etappe 1: " + lagetsScore);
 
         } catch (Exception e) {
             System.out.println("Klarte ikke lese JSON-filen");

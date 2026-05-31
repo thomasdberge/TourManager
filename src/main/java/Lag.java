@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lag {
-    private String managerNavn;
+    String managerNavn;
     private int budsjett;
     private List<Rytter> valgteRyttere;
 
@@ -74,6 +74,23 @@ public class Lag {
                 System.out.println("Ukjent rolle: " + rolle);
                 return false;
         }
+    }
+
+    public int beregnPoeng(){
+        int totalPoeng = 0;
+
+        for (Rytter r : valgteRyttere){
+            int rytterPoeng = r.getPoeng();
+            if (r.getRolle().equalsIgnoreCase("Lagkaptein")){
+                rytterPoeng = rytterPoeng * 2;
+                System.out.println(r.getNavn()+" fikk " + rytterPoeng + " poeng.");
+            } else {
+                System.out.println(r.getNavn() + " dro inn " + rytterPoeng + " poeng.");
+            }
+
+            totalPoeng += rytterPoeng;
+        }
+        return totalPoeng;
     }
 
     public void printLagStatus(){
