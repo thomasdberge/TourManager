@@ -21,6 +21,24 @@ public class Main {
             for (Rytter rytter : alleRyttere) {
                 System.out.println(rytter.toString());
             }
+
+            System.out.println("\nStarter laguttak...");
+
+            Lag mittlag = new Lag("Test-Team");
+
+            Rytter onsketRytter1 = alleRyttere.get(0);
+            mittlag.kjopRytter(onsketRytter1);
+
+            Rytter onsketRytter2 = alleRyttere.get(1);
+            mittlag.kjopRytter(onsketRytter2);
+
+            mittlag.selgRytter(onsketRytter1);
+
+            Rytter onsketRytter3 = alleRyttere.get(2);
+            mittlag.kjopRytter(onsketRytter3);
+
+            mittlag.printLagStatus();
+
         } catch (Exception e) {
             System.out.println("Klarte ikke lese JSON-filen");
             e.printStackTrace();

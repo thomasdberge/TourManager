@@ -14,5 +14,61 @@
     "pris": 11,
     "rolle": "Lagkaptein",
     "poeng": 0
+  },
+  {
+    "id": 3,
+    "navn": "Retcon Eventyrpol",
+    "lag": "Red Ball - BORN - hisgrotte",
+    "pris": 10,
+    "rolle": "Lagkaptein",
+    "poeng": 0
+  },
+  {
+    "id": 4,
+    "navn": "Philip Jaspersen",
+    "lag": "Alpine - Premier League",
+    "pris": 11.5,
+    "rolle": "Spurter",
+    "poeng": 0
+  },
+  {
+    "id": 5,
+    "navn": "Julio Sjikone",
+    "lag": "Little - Tekk",
+    "pris": 8,
+    "rolle": "Klatrer",
+    "poeng": 0
+  },
+  {
+    "id": 6,
+    "navn": "Benny Martinoes",
+    "lag": "Bare - Invictus",
+    "pris": 7.5,
+    "rolle": "Ungdomsrytter",
+    "poeng": 0
+  },
+  {
+    "id": 7,
+    "navn": "Abraham Jonassen",
+    "lag": "Esso-Y",
+    "pris": 6,
+    "rolle": "Hjelperytter",
+    "poeng": 0
+  },
+  {
+    "id": 8,
+    "navn": "Gilippo Fanna",
+    "lag": "Jetcompany IDEOS",
+    "pris": 7,
+    "rolle": "Temporytter",
+    "poeng": 0
+  },
+  {
+    "id": 9,
+    "navn": "Team Dumbo Vimsat",
+    "lag": "Team Dumbo Vimsat",
+    "pris": 10.5,
+    "rolle": "Sportsdirektør",
+    "poeng": 0
   }
 ]
