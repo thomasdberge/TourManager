@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Tour Manager 2026</title>
+    <style>
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; padding: 20px; }
+        h1 { color: #333; text-align: center; }
+        .rytter-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 30px; }
+        .rytter-kort { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; }
+        .rytter-kort h3 { margin-top: 0; color: #0056b3; border-bottom: 2px solid #f4f4f9; padding-bottom: 10px;}
+        .pris { font-weight: bold; color: #28a745; font-size: 1.1em; }
+        button { background-color: #0056b3; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px;}
+        button:hover { background-color: #004494; }
+    </style>
+</head>
+<body>
+
+<h1>Tour Manager: Spillerbørs</h1>
+
+<div id="rytter-container" class="rytter-grid"></div>
+
+<script>
+
+    fetch('/api/ryttere')
+        .then(response => response.json()) // Oversetter fra JSON
+        .then(ryttere => {
+            const container = document.getElementById('rytter-container');
+
+
+            ryttere.forEach(rytter => {
+
+                const kort = document.createElement('div');
+                kort.className = 'rytter-kort';
+
+                kort.innerHTML = `
+                        <h3>${rytter.navn}</h3>
+                        <p><strong>Rolle:</strong> ${rytter.rolle}</p>
+                        <p><strong>Lag:</strong> ${rytter.lag}</p>
+                        <p class="pris">Pris: ${rytter.pris} mill.</p>
+                        <p>Poeng: ${rytter.poeng}</p>
+                        <button onclick="alert('Snart kan du kjøpe ${rytter.navn}!')">Kjøp rytter</button>
+                    `;
+
+
+                container.appendChild(kort);
+            });
+        })
+        .catch(error => console.error('Klarte ikke hente ryttere:', error));
+</script>
+
+</body>
+</html>

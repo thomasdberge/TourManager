@@ -1,3 +1,5 @@
+package tourmanager;
+
 public class Rytter {
     private int id;
     private String navn;
