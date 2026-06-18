@@ -4,50 +4,96 @@
     <meta charset="UTF-8">
     <title>Tour Manager 2026</title>
     <style>
-
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; padding: 20px; }
-        h1 { color: #333; text-align: center; }
-        .rytter-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 30px; }
+        h1, h2 { color: #333; text-align: center; }
+
+        .dashboard { background: #e9ecef; padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: center; border: 2px solid #ccc;}
+        .budsjett { font-size: 1.5em; font-weight: bold; color: #28a745; }
+        .mitt-lag-liste { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .lag-medlem { background: #0056b3; color: white; padding: 10px 15px; border-radius: 20px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        .rytter-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
         .rytter-kort { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; }
         .rytter-kort h3 { margin-top: 0; color: #0056b3; border-bottom: 2px solid #f4f4f9; padding-bottom: 10px;}
         .pris { font-weight: bold; color: #28a745; font-size: 1.1em; }
-        button { background-color: #0056b3; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px;}
-        button:hover { background-color: #004494; }
+        button { background-color: #28a745; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px;}
+        button:hover { background-color: #218838; }
     </style>
 </head>
 <body>
 
-<h1>Tour Manager: Spillerbørs</h1>
+<h1>Tour Manager 2026</h1>
 
+<div class="dashboard">
+    <h2>Mitt Lag</h2>
+    <p class="budsjett">Budsjett igjen: <span id="budsjett-visning">Laster...</span> mill.</p>
+    <ul id="mitt-lag-liste" class="mitt-lag-liste">
+    </ul>
+</div>
+
+<h2>Overgangsmarked</h2>
 <div id="rytter-container" class="rytter-grid"></div>
 
 <script>
+    window.onload = () => {
+        hentAlleRyttere();
+        oppdaterLagStatus();
+    };
 
-    fetch('/api/ryttere')
-        .then(response => response.json()) // Oversetter fra JSON
-        .then(ryttere => {
-            const container = document.getElementById('rytter-container');
+    function hentAlleRyttere() {
+        fetch('/api/ryttere')
+            .then(response => response.json())
+            .then(ryttere => {
+                const container = document.getElementById('rytter-container');
+                container.innerHTML = '';
 
+                ryttere.forEach(rytter => {
+                    const kort = document.createElement('div');
+                    kort.className = 'rytter-kort';
 
-            ryttere.forEach(rytter => {
-
-                const kort = document.createElement('div');
-                kort.className = 'rytter-kort';
-
-                kort.innerHTML = `
-                        <h3>${rytter.navn}</h3>
-                        <p><strong>Rolle:</strong> ${rytter.rolle}</p>
-                        <p><strong>Lag:</strong> ${rytter.lag}</p>
-                        <p class="pris">Pris: ${rytter.pris} mill.</p>
-                        <p>Poeng: ${rytter.poeng}</p>
-                        <button onclick="alert('Snart kan du kjøpe ${rytter.navn}!')">Kjøp rytter</button>
-                    `;
-
-
-                container.appendChild(kort);
+                    kort.innerHTML = `
+                            <h3>${rytter.navn}</h3>
+                            <p><strong>Rolle:</strong> ${rytter.rolle}</p>
+                            <p><strong>Lag:</strong> ${rytter.lag}</p>
+                            <p class="pris">Pris: ${rytter.pris} mill.</p>
+                            <p>Poeng: ${rytter.poeng}</p>
+                            <button onclick="kjopRytter(${rytter.id})">Kjøp rytter</button>
+                        `;
+                    container.appendChild(kort);
+                });
             });
-        })
-        .catch(error => console.error('Klarte ikke hente ryttere:', error));
+    }
+
+    function oppdaterLagStatus() {
+        fetch('/api/lag')
+            .then(response => response.json())
+            .then(lag => {
+                document.getElementById('budsjett-visning').innerText = lag.budsjett;
+
+                const liste = document.getElementById('mitt-lag-liste');
+                liste.innerHTML = '';
+
+                if (lag.valgteRyttere && lag.valgteRyttere.length > 0) {
+                    lag.valgteRyttere.forEach(rytter => {
+                        const li = document.createElement('li');
+                        li.className = 'lag-medlem';
+                        li.innerText = `${rytter.navn} (${rytter.rolle})`;
+                        liste.appendChild(li);
+                    });
+                } else {
+                    liste.innerHTML = '<li>Du har ikke kjøpt noen ryttere enda.</li>';
+                }
+            });
+    }
+
+    function kjopRytter(rytterId) {
+        fetch('/api/lag/kjop?id=' + rytterId, { method: 'POST' })
+            .then(response => response.text())
+            .then(melding => {
+                alert(melding);
+                oppdaterLagStatus();
+            });
+    }
 </script>
 
 </body>

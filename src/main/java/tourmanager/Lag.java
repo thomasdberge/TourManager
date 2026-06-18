@@ -105,4 +105,16 @@ public class Lag {
         }
         System.out.println("----------------------------------\n");
     }
+
+    public String getManagerNavn() {
+        return managerNavn;
+    }
+
+    public int getBudsjett() {
+        return budsjett;
+    }
+
+    public List<Rytter> getValgteRyttere() {
+        return valgteRyttere;
+    }
 }
