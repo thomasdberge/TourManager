@@ -1,5 +1,6 @@
 package tourmanager;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,34 +10,32 @@ import java.util.List;
 public class LagController {
 
     private final Lag mittLag = new Lag("TestLaget");
+    private final RytterService rytterService;
+
+    public LagController(RytterService rytterService) {
+        this.rytterService = rytterService;
+    }
 
     @GetMapping
-    public Lag hentLagStatus(){
+    public Lag hentLagStatus() {
         return mittLag;
     }
 
     @PostMapping("/kjop")
-    public String kjopRytter(@RequestParam int id){
-        RytterController rytterCtrl = new RytterController();
-        List<Rytter> alleRyttere = rytterCtrl.hentAlleRyttere();
+    public ResponseEntity<String> kjopRytter(@RequestParam int id) {
+        Rytter onsketRytter = rytterService.finnById(id).orElse(null);
 
-        Rytter onsketRytter = null;
-        for (Rytter r : alleRyttere){
-            if (r.getId() == id){
-                onsketRytter = r;
-                break;
-            }
-        }
-        if (onsketRytter == null){
-            return "Noe galt skjedde";
+        if (onsketRytter == null) {
+            return ResponseEntity.status(404)
+                    .body("Fant ingen rytter med id " + id);
         }
 
         boolean suksess = mittLag.kjopRytter(onsketRytter);
 
-        if (suksess){
-            return "Suksess! " + onsketRytter.getNavn() + " ble lagt til på laget.";
+        if (suksess) {
+            return ResponseEntity.ok("Suksess! " + onsketRytter.getNavn() + " ble lagt til på laget.");
         } else {
-            return "Avvist! Sjekk budsjett";
+            return ResponseEntity.badRequest().body("Avvist! Sjekk budsjett eller kvoter.");
         }
     }
 }

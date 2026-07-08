@@ -4,7 +4,7 @@ public class Rytter {
     private int id;
     private String navn;
     private String lag;
-    private int pris;
+    private double pris;
     private String rolle;
     private int poeng;
 
@@ -12,7 +12,7 @@ public class Rytter {
 
     }
 
-    public Rytter(int id, String navn, String lag, int pris, String rolle, int poeng){
+    public Rytter(int id, String navn, String lag, double pris, String rolle, int poeng){
         this.id = id;
         this.navn = navn;
         this.lag = lag;
@@ -29,8 +29,8 @@ public class Rytter {
     public String getLag() {return lag;}
     public void setLag(String lag) {this.lag = lag;}
 
-    public int getPris() {return pris;}
-    public void setPris(int pris) {this.pris = pris;}
+    public double getPris() {return pris;}
+    public void setPris(double pris) {this.pris = pris;}
 
     public String getRolle() {return rolle;}
     public void setRolle(String rolle) {this.rolle = rolle;}
