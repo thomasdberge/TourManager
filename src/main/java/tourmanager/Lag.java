@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lag {
     String managerNavn;
-    private int budsjett;
+    private double budsjett;
     private List<Rytter> valgteRyttere;
 
     public Lag(String managerNavn){
@@ -110,7 +110,7 @@ public class Lag {
         return managerNavn;
     }
 
-    public int getBudsjett() {
+    public double getBudsjett() {
         return budsjett;
     }
 

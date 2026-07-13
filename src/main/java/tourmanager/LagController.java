@@ -38,4 +38,20 @@ public class LagController {
             return ResponseEntity.badRequest().body("Avvist! Sjekk budsjett eller kvoter.");
         }
     }
+
+    @DeleteMapping("/ryttere/{id}")
+    public ResponseEntity<String> selgRytter(@PathVariable int id) {
+        Rytter rytter = mittLag.getValgteRyttere().stream()
+                .filter(r -> r.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if (rytter == null) {
+            return ResponseEntity.status(404)
+                    .body("Rytter med id " + id + " er ikke på laget ditt.");
+        }
+
+        mittLag.selgRytter(rytter);
+        return ResponseEntity.ok(rytter.getNavn() + " ble solgt.");
+    }
 }
