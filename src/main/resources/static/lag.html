@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mitt lag – TourManager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/felles.css">
+  <link rel="stylesheet" href="css/lag.css">
+</head>
+<body>
+
+<!-- Trøyemønstre (refereres av alle trøye-SVG-ene) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="monster-prikker" patternUnits="userSpaceOnUse" width="16" height="16">
+      <rect width="16" height="16" fill="#ffffff"/>
+      <circle cx="8" cy="8" r="3.4" fill="#D8402F"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="topplinje">
+  <a class="logo" href="index.html">TOURMANAGER</a>
+  <nav>
+    <a href="lag.html" class="aktiv">Mitt lag</a>
+    <a href="index.html#slik-funker-det">Slik funker det</a>
+  </nav>
+</header>
+
+<div class="app">
+
+  <!-- ============ VENSTRE: MARKEDET ============ -->
+  <aside class="marked-panel">
+    <h2>Overgangsmarkedet</h2>
+
+    <!-- Rollefilter med kvoteteller -->
+    <div id="rolle-filter" class="rolle-faner" role="group" aria-label="Filtrer etter rolle"></div>
+
+    <div class="sok-og-lag">
+      <input type="search" id="sok-felt" placeholder="Søk rytter …" aria-label="Søk etter rytter">
+      <select id="lag-filter" aria-label="Filtrer etter sykkellag">
+        <option value="alle">Alle lag</option>
+      </select>
+    </div>
+
+    <div id="pris-filter" class="pris-chips" role="group" aria-label="Filtrer etter pris">
+      <button class="filter-chip aktiv" data-pris="alle">Alle</button>
+      <button class="filter-chip" data-pris="lav">&lt; 5M</button>
+      <button class="filter-chip" data-pris="middels">5–8M</button>
+      <button class="filter-chip" data-pris="hoy">8M+</button>
+    </div>
+
+    <p id="treff-teller" class="treff-teller"></p>
+
+    <div id="rytter-container" class="rytter-liste"></div>
+  </aside>
+
+  <!-- ============ HØYRE: LAGET MITT ============ -->
+  <main class="lag-visning">
+    <div class="landskap" aria-hidden="true">
+      <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMax slice">
+        <circle cx="790" cy="110" r="70" class="sol"/>
+        <circle cx="790" cy="110" r="92" class="sol-ring"/>
+        <path class="aker aker-1" d="M0,430 Q250,395 500,425 T1000,410 L1000,600 L0,600 Z"/>
+        <path class="aker aker-2" d="M0,490 Q270,455 540,485 T1000,470 L1000,600 L0,600 Z"/>
+        <path class="aker aker-3" d="M0,550 Q260,520 520,545 T1000,535 L1000,600 L0,600 Z"/>
+      </svg>
+    </div>
+
+    <div class="lag-innhold">
+      <h1>Laget mitt</h1>
+      <div id="lag-grupper" class="lag-grupper"></div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ BUNNLINJE ============ -->
+<footer class="statuslinje">
+  <div class="status-post">
+    <span class="status-tall rod-tall"><span id="budsjett-visning">100</span><small> mill.</small></span>
+    <span class="status-tekst">Budsjett igjen</span>
+  </div>
+  <div class="status-post">
+    <span class="status-tall"><span id="antall-visning">0</span><small>/13</small></span>
+    <span class="status-tekst">Ryttere</span>
+  </div>
+  <div id="kvote-oversikt" class="kvote-oversikt" aria-label="Kvoter per rolle"></div>
+  <p class="disclaimer">Uoffisielt hobbyprosjekt – ikke tilknyttet ASO eller Tour de France.</p>
+</footer>
+
+<script src="js/lag.js"></script>
+</body>
+</html>

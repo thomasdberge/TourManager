@@ -1,0 +1,233 @@
+/* ============ TourManager – forside.css ============
+   Kun forsiden: hero med plakat-SVG, CTA-knapper,
+   startnummer-regelkort og footer.
+   Forutsetter at felles.css er lastet først.
+===================================================== */
+
+body { background: var(--himmel); line-height: 1.6; }
+
+/* ---------- Toppmeny: flyter over heroen ---------- */
+
+.topplinje {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  color: var(--blekk);
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 94vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.plakat-bakgrunn {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.plakat-bakgrunn svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sol      { fill: var(--sol); }
+.sol-ring { fill: none; stroke: rgba(242, 179, 44, 0.45); stroke-width: 3; }
+
+.aker-1 { fill: var(--eng); }
+.aker-2 { fill: var(--sol); opacity: 0.92; }   /* solsikkefeltet */
+.aker-3 { fill: var(--eng-mork); }
+
+.solsikker circle { fill: rgba(96, 72, 12, 0.35); }
+
+.vei { fill: var(--papir); }
+
+.vei-stripe {
+  fill: none;
+  stroke: var(--rod);
+  stroke-width: 4;
+  stroke-dasharray: 22 16;
+  stroke-linecap: round;
+  animation: rull 14s linear infinite;
+}
+
+@keyframes rull {
+  to { stroke-dashoffset: -380; }
+}
+
+.peloton circle { fill: var(--blekk); }
+.peloton .utbryter { fill: var(--rod); stroke: var(--papir); stroke-width: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vei-stripe { animation: none; }
+}
+
+/* ---------- Hero-innhold ---------- */
+
+.hero-innhold {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  padding: 120px clamp(20px, 5vw, 64px) 200px;
+}
+
+.etappe-merke {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--papir);
+  background: var(--blekk);
+  border-radius: 4px;
+  padding: 6px 14px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-family: 'Alfa Slab One', serif;
+  font-size: clamp(2.8rem, 7.5vw, 5rem);
+  line-height: 1.06;
+  color: var(--blekk);
+  text-shadow: 3px 3px 0 rgba(250, 245, 233, 0.55);
+}
+
+h1 .rod { color: var(--rod); }
+
+.ingress {
+  margin-top: 20px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  max-width: 500px;
+}
+
+/* ---------- Knapper ---------- */
+
+.knapper {
+  margin-top: 36px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.knapp {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 6px;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.knapp:active { transform: translate(2px, 2px); box-shadow: none; }
+
+.knapp-primar {
+  background: var(--rod);
+  color: var(--papir);
+  box-shadow: 4px 4px 0 var(--blekk);
+}
+
+.knapp-primar:hover,
+.knapp-primar:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--blekk);
+}
+
+.knapp-sekundar {
+  color: var(--blekk);
+  border: 2px solid var(--blekk);
+  background: rgba(250, 245, 233, 0.5);
+}
+
+.knapp-sekundar:hover,
+.knapp-sekundar:focus-visible { background: var(--papir); }
+
+/* ---------- Regler (startnummer-kort) ---------- */
+
+.regler {
+  background: var(--papir);
+  padding: 90px clamp(20px, 5vw, 64px) 100px;
+}
+
+.regler h2 {
+  font-family: 'Alfa Slab One', serif;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin: 0 auto 40px;
+  max-width: 1100px;
+}
+
+.regel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.regel-kort {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--blekk);
+  border-radius: 4px;
+  padding: 30px 24px 24px;
+  box-shadow: 5px 5px 0 rgba(34, 48, 74, 0.18);
+}
+
+/* sikkerhetsnåler */
+.regel-kort::before,
+.regel-kort::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  width: 26px;
+  height: 8px;
+  background: var(--blekk);
+  border-radius: 999px;
+}
+
+.regel-kort::before { left: 22px; transform: rotate(-4deg); }
+.regel-kort::after  { right: 22px; transform: rotate(4deg); }
+
+.startnummer {
+  display: block;
+  font-family: 'Alfa Slab One', serif;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--rod);
+  margin-bottom: 10px;
+}
+
+.regel-kort h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.regel-kort p {
+  font-size: 0.98rem;
+  color: rgba(34, 48, 74, 0.75);
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  background: var(--blekk);
+  color: rgba(250, 245, 233, 0.7);
+  padding: 28px clamp(20px, 5vw, 64px);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ---------- Mobil ---------- */
+
+@media (max-width: 560px) {
+  .hero-innhold { padding-top: 100px; padding-bottom: 240px; }
+}

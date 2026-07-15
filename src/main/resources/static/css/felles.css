@@ -1,0 +1,119 @@
+/* ============ TourManager – felles.css ============
+   Delt av alle sider: palett, reset, basetypografi,
+   toppmeny, filterchips og toast.
+   Regel: brukes noe på mer enn én side, bor det her.
+==================================================== */
+
+:root {
+  --himmel: #7FB5D6;
+  --blekk: #22304A;
+  --rod: #D8402F;
+  --sol: #F2B32C;
+  --eng: #8FAE5D;
+  --eng-mork: #7A9C4E;
+  --papir: #FAF5E9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  background: var(--papir);
+  color: var(--blekk);
+  font-family: 'Karla', sans-serif;
+  line-height: 1.5;
+}
+
+/* ---------- Toppmeny (layout; farger settes per side) ---------- */
+
+.topplinje {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px clamp(16px, 4vw, 64px);
+}
+
+.logo {
+  font-family: 'Alfa Slab One', serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: inherit;
+  text-decoration: none;
+}
+
+.topplinje nav a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-left: 28px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s;
+}
+
+.topplinje nav a:hover,
+.topplinje nav a:focus-visible,
+.topplinje nav a.aktiv { border-color: var(--rod); }
+
+@media (max-width: 560px) {
+  .topplinje nav a { margin-left: 16px; font-size: 0.85rem; }
+}
+
+/* ---------- Filterchips (brukes i markedet, gjenbrukbare) ---------- */
+
+.filter-chip {
+  background: #fff;
+  border: 2px solid var(--blekk);
+  color: var(--blekk);
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.filter-chip:hover,
+.filter-chip:focus-visible { background: rgba(127, 181, 214, 0.25); }
+.filter-chip.aktiv { background: var(--blekk); color: var(--papir); }
+
+/* ---------- Felles fokusmarkering ---------- */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--rod);
+  outline-offset: 2px;
+}
+
+/* ---------- Toast ---------- */
+
+.beskjed {
+  position: fixed;
+  left: 50%;
+  bottom: 80px;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--blekk);
+  color: var(--papir);
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 12px 22px;
+  box-shadow: 4px 4px 0 rgba(34, 48, 74, 0.3);
+  border: 2px solid var(--papir);
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  z-index: 50;
+  max-width: min(90vw, 480px);
+  text-align: center;
+}
+
+.beskjed.vis { opacity: 1; transform: translateX(-50%) translateY(0); }
+.beskjed.feil { background: var(--rod); }

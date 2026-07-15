@@ -1,0 +1,446 @@
+/* ============ TourManager – lag.css ============
+   Kun lagsiden: markedspanel, trøyevisning og statuslinje.
+   Forutsetter at felles.css er lastet først.
+================================================= */
+
+html, body { height: 100%; }
+
+body {
+  line-height: 1.45;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Toppmeny: mørk variant ---------- */
+
+.topplinje {
+  background: var(--blekk);
+  color: var(--papir);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.topplinje nav a { color: rgba(250, 245, 233, 0.75); }
+
+.topplinje nav a:hover,
+.topplinje nav a:focus-visible,
+.topplinje nav a.aktiv { color: var(--papir); }
+
+/* ---------- App-oppsett ---------- */
+
+.app {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(340px, 420px) 1fr;
+  min-height: 0;
+}
+
+/* ============ MARKEDSPANELET ============ */
+
+.marked-panel {
+  background: var(--papir);
+  border-right: 4px solid var(--blekk);
+  padding: 20px 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.marked-panel h2 {
+  font-family: 'Alfa Slab One', serif;
+  font-size: 1.3rem;
+}
+
+/* Rollefaner med kvoteteller */
+.rolle-faner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.rolle-fane {
+  background: #fff;
+  border: 2px solid var(--blekk);
+  border-radius: 6px;
+  padding: 6px 2px;
+  cursor: pointer;
+  font-family: 'Karla', sans-serif;
+  text-align: center;
+  transition: background 0.12s;
+}
+
+.rolle-fane:hover,
+.rolle-fane:focus-visible { background: rgba(127, 181, 214, 0.25); }
+
+.rolle-fane.aktiv { background: var(--blekk); color: var(--papir); }
+
+.rolle-fane .kode {
+  display: block;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+.rolle-fane .teller {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(34, 48, 74, 0.55);
+}
+
+.rolle-fane.aktiv .teller { color: rgba(250, 245, 233, 0.7); }
+.rolle-fane.full .teller { color: var(--eng-mork); }
+.rolle-fane.aktiv.full .teller { color: var(--eng); }
+
+/* Søk + lagfilter */
+.sok-og-lag {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+#sok-felt, #lag-filter {
+  background: #fff;
+  border: 2px solid var(--blekk);
+  border-radius: 6px;
+  color: var(--blekk);
+  font-family: 'Karla', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+#sok-felt::placeholder { color: rgba(34, 48, 74, 0.45); }
+
+.pris-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.treff-teller {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(34, 48, 74, 0.55);
+}
+
+/* Rytterliste */
+.rytter-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.rytter-rad {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 2px solid var(--blekk);
+  border-radius: 6px;
+  padding: 8px 10px;
+  box-shadow: 2px 2px 0 rgba(34, 48, 74, 0.12);
+}
+
+.rytter-rad.eid { opacity: 0.5; }
+
+.rytter-info { min-width: 0; }
+
+.rytter-navn {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rytter-lag {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(34, 48, 74, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pris {
+  font-family: 'Alfa Slab One', serif;
+  font-size: 0.95rem;
+  color: var(--rod);
+  white-space: nowrap;
+}
+
+.pris small {
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 0.65rem;
+  color: rgba(34, 48, 74, 0.55);
+}
+
+.tom-liste {
+  background: rgba(34, 48, 74, 0.05);
+  border: 2px dashed rgba(34, 48, 74, 0.35);
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgba(34, 48, 74, 0.6);
+}
+
+/* Kjøpsknapp */
+.kjop-knapp {
+  background: var(--rod);
+  color: var(--papir);
+  border: none;
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  padding: 7px 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--blekk);
+  transition: transform 0.12s, box-shadow 0.12s;
+  white-space: nowrap;
+}
+
+.kjop-knapp:hover:not(:disabled),
+.kjop-knapp:focus-visible:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--blekk);
+}
+
+.kjop-knapp:active:not(:disabled) { transform: translate(1px, 1px); box-shadow: none; }
+
+.kjop-knapp:disabled {
+  background: rgba(34, 48, 74, 0.22);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Minitrøye i lista */
+.mini-troye { width: 30px; height: 27px; flex-shrink: 0; }
+
+/* ============ LAGVISNINGEN ============ */
+
+.lag-visning {
+  position: relative;
+  background: var(--himmel);
+  overflow-y: auto;
+}
+
+.landskap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.landskap svg { width: 100%; height: 100%; display: block; }
+
+.sol      { fill: var(--sol); }
+.sol-ring { fill: none; stroke: rgba(242, 179, 44, 0.45); stroke-width: 3; }
+.aker-1   { fill: var(--eng); }
+.aker-2   { fill: var(--sol); opacity: 0.92; }
+.aker-3   { fill: var(--eng-mork); }
+
+.lag-innhold {
+  position: relative;
+  padding: 26px clamp(18px, 3vw, 48px) 48px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.lag-innhold h1 {
+  font-family: 'Alfa Slab One', serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  text-shadow: 3px 3px 0 rgba(250, 245, 233, 0.55);
+  margin-bottom: 20px;
+}
+
+.lag-grupper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px 34px;
+}
+
+.rolle-gruppe { min-width: 150px; }
+
+.gruppe-navn {
+  display: inline-block;
+  background: var(--blekk);
+  color: var(--papir);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 12px;
+}
+
+.troye-rekke {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Trøyeplass (fylt eller tom) */
+.troye-plass {
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.troye-plass svg {
+  width: 86px;
+  height: 78px;
+  filter: drop-shadow(3px 3px 0 rgba(34, 48, 74, 0.25));
+}
+
+.troye-plass.fylt svg { animation: ny-troye 0.25s ease-out; }
+
+@keyframes ny-troye {
+  from { transform: translateY(6px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .troye-plass.fylt svg { animation: none; }
+}
+
+.navneskilt {
+  background: #fff;
+  border: 2px solid var(--blekk);
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.76rem;
+  text-align: center;
+  padding: 3px 8px;
+  max-width: 110px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 2px 2px 0 rgba(34, 48, 74, 0.18);
+}
+
+.troye-pris {
+  font-family: 'Alfa Slab One', serif;
+  font-size: 0.78rem;
+  color: var(--blekk);
+}
+
+.selg-knapp {
+  background: none;
+  border: 2px solid var(--rod);
+  color: var(--rod);
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  padding: 2px 10px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.selg-knapp:hover,
+.selg-knapp:focus-visible { background: var(--rod); color: var(--papir); }
+
+/* Tom plass: stiplet trøye, klikkbar -> filtrerer markedet */
+.tom-plass {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Karla', sans-serif;
+}
+
+.tom-plass svg { opacity: 0.85; }
+
+.tom-plass .plass-tekst {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--blekk);
+  opacity: 0.75;
+  margin-top: 4px;
+}
+
+.tom-plass:hover svg,
+.tom-plass:focus-visible svg { opacity: 1; }
+
+/* ============ STATUSLINJE ============ */
+
+.statuslinje {
+  background: var(--blekk);
+  color: var(--papir);
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 4vw, 48px);
+  padding: 12px clamp(16px, 3vw, 40px);
+  flex-wrap: wrap;
+}
+
+.status-post { text-align: center; }
+
+.status-tall {
+  display: block;
+  font-family: 'Alfa Slab One', serif;
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.status-tall small { font-size: 0.8rem; }
+
+.rod-tall { color: var(--sol); }
+
+#budsjett-visning.lavt { color: var(--rod); }
+
+.status-tekst {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.kvote-oversikt { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.kvote-tag {
+  border: 2px solid rgba(250, 245, 233, 0.4);
+  color: rgba(250, 245, 233, 0.8);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.kvote-tag.full {
+  background: var(--eng);
+  border-color: var(--eng);
+  color: #fff;
+}
+
+.disclaimer {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: rgba(250, 245, 233, 0.5);
+}
+
+/* ---------- Mobil ---------- */
+
+@media (max-width: 860px) {
+  .app { grid-template-columns: 1fr; }
+
+  .lag-visning { order: -1; max-height: 52vh; }
+
+  .marked-panel {
+    border-right: none;
+    border-top: 4px solid var(--blekk);
+  }
+
+  .disclaimer { display: none; }
+}

@@ -11,7 +11,7 @@
     "id": 2,
     "navn": "Vonas Jinglegaard",
     "lag": "Team Dumbo Vimsat",
-    "pris": 11,
+    "pris": 11.0,
     "rolle": "Lagkaptein",
     "poeng": 0
   },
@@ -19,7 +19,7 @@
     "id": 3,
     "navn": "Retcon Eventyrpol",
     "lag": "Red Ball - BORN - hisgrotte",
-    "pris": 10,
+    "pris": 10.0,
     "rolle": "Lagkaptein",
     "poeng": 0
   },
@@ -35,7 +35,7 @@
     "id": 5,
     "navn": "Julio Sjikone",
     "lag": "Little - Tekk",
-    "pris": 8,
+    "pris": 8.0,
     "rolle": "Klatrer",
     "poeng": 0
   },
@@ -51,7 +51,7 @@
     "id": 7,
     "navn": "Abraham Jonassen",
     "lag": "Esso-Y",
-    "pris": 6,
+    "pris": 6.0,
     "rolle": "Hjelperytter",
     "poeng": 0
   },
@@ -59,7 +59,7 @@
     "id": 8,
     "navn": "Gilippo Fanna",
     "lag": "Jetcompany IDEOS",
-    "pris": 7,
+    "pris": 7.1,
     "rolle": "Temporytter",
     "poeng": 0
   },
@@ -68,6 +68,70 @@
     "navn": "Team Dumbo Vimsat",
     "lag": "Team Dumbo Vimsat",
     "pris": 10.5,
+    "rolle": "Sportsdirektør",
+    "poeng": 0
+  },
+  {
+    "id": 10,
+    "navn": "Tom Meunier",
+    "lag": "Soda SlowStep",
+    "pris": 11.5,
+    "rolle": "Spurter",
+    "poeng": 0
+  },
+  {
+    "id": 11,
+    "navn": "Lupe Klakk",
+    "lag": "Team Jason Aloha",
+    "pris": 6.5,
+    "rolle": "Klatrer",
+    "poeng": 0
+  },
+  {
+    "id": 12,
+    "navn": "Kevan Vaselin",
+    "lag": "JetCompany IDEOS",
+    "pris": 7.0,
+    "rolle": "Ungdomsrytter",
+    "poeng": 0
+  },
+  {
+    "id": 13,
+    "navn": "Matthew von das Pole",
+    "lag": "Alpine - Premier League",
+    "pris": 8.0,
+    "rolle": "Hjelperytter",
+    "poeng": 0
+  },
+  {
+    "id": 14,
+    "navn": "Bean Hilly",
+    "lag": "IF School - HardMail",
+    "pris": 7.5,
+    "rolle": "Hjelperytter",
+    "poeng": 0
+  },
+  {
+    "id": 15,
+    "navn": "Silver Dillian",
+    "lag": "Alpine - Premier League",
+    "pris": 3.4,
+    "rolle": "Hjelperytter",
+    "poeng": 0
+  },
+  {
+    "id": 16,
+    "navn": "Jean Kvinn",
+    "lag": "IF School - HardMail",
+    "pris": 4.5,
+    "rolle": "Klatrer",
+    "poeng": 0
+  },
+  {
+    "id": 17,
+    "navn": "EnergyTotal",
+    "lag": "EnergyTotal",
+    "pris": 5.1,
     "rolle": "Sportsdirektør",
     "poeng": 0
   }

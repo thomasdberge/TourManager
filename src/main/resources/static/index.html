@@ -1,112 +1,105 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <title>Tour Manager 2026</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; padding: 20px; }
-        h1, h2 { color: #333; text-align: center; }
-
-        .dashboard { background: #e9ecef; padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: center; border: 2px solid #ccc;}
-        .budsjett { font-size: 1.5em; font-weight: bold; color: #28a745; }
-        .mitt-lag-liste { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-        .lag-medlem { background: #0056b3; color: white; padding: 10px 15px; border-radius: 20px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-
-        .rytter-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .rytter-kort { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; }
-        .rytter-kort h3 { margin-top: 0; color: #0056b3; border-bottom: 2px solid #f4f4f9; padding-bottom: 10px;}
-        .pris { font-weight: bold; color: #28a745; font-size: 1.1em; }
-        button { background-color: #28a745; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px;}
-        button:hover { background-color: #218838; }
-        .selg-knapp {background-color: #dc3545}
-        .selg-knapp:hover {background-color: #8B0000}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TourManager – Fantasy for Tour de France</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/felles.css">
+  <link rel="stylesheet" href="css/forside.css">
 </head>
 <body>
 
-<h1>Tour Manager 2026</h1>
+<header class="topplinje">
+  <span class="logo">TOURMANAGER</span>
+  <nav>
+    <a href="lag.html">Mitt lag</a>
+    <a href="#slik-funker-det">Slik funker det</a>
+  </nav>
+</header>
 
-<div class="dashboard">
-    <h2>Mitt Lag</h2>
-    <p class="budsjett">Budsjett igjen: <span id="budsjett-visning">Laster...</span> mill.</p>
-    <ul id="mitt-lag-liste" class="mitt-lag-liste">
-    </ul>
-</div>
+<main class="hero">
 
-<h2>Overgangsmarked</h2>
-<div id="rytter-container" class="rytter-grid"></div>
+  <!-- Bakgrunn: sommerdag, sol, åkre og vei som snor seg mot horisonten -->
+  <div class="plakat-bakgrunn" aria-hidden="true">
+    <svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice">
+      <!-- Sol -->
+      <circle class="sol" cx="1080" cy="180" r="110"/>
+      <circle class="sol-ring" cx="1080" cy="180" r="140"/>
 
-<script>
-    window.onload = () => {
-        hentAlleRyttere();
-        oppdaterLagStatus();
-    };
+      <!-- Åsrygger / åkre i band -->
+      <path class="aker aker-1" d="M0,430 Q360,380 720,420 T1440,400 L1440,760 L0,760 Z"/>
+      <path class="aker aker-2" d="M0,505 Q400,460 800,500 T1440,480 L1440,760 L0,760 Z"/>
+      <path class="aker aker-3" d="M0,590 Q380,550 760,585 T1440,570 L1440,760 L0,760 Z"/>
 
-    function hentAlleRyttere() {
-        fetch('/api/ryttere')
-            .then(response => response.json())
-            .then(ryttere => {
-                const container = document.getElementById('rytter-container');
-                container.innerHTML = '';
+      <!-- Solsikkeprikker i det gule feltet -->
+      <g class="solsikker">
+        <circle cx="150" cy="540" r="5"/><circle cx="300" cy="555" r="4"/>
+        <circle cx="480" cy="545" r="5"/><circle cx="640" cy="560" r="4"/>
+        <circle cx="850" cy="550" r="5"/><circle cx="1040" cy="558" r="4"/>
+        <circle cx="1230" cy="545" r="5"/><circle cx="1380" cy="556" r="4"/>
+      </g>
 
-                ryttere.forEach(rytter => {
-                    const kort = document.createElement('div');
-                    kort.className = 'rytter-kort';
+      <!-- Veien: snor seg fra horisonten og ut mot betrakteren -->
+      <path class="vei"
+        d="M760,415 C700,450 940,490 830,530 C720,570 400,590 480,650 C560,710 420,760 380,760
+           L640,760 C600,720 760,690 820,655 C930,590 620,565 780,522 C880,495 700,455 800,418 Z"/>
+      <path class="vei-stripe"
+        d="M775,417 C720,450 900,495 810,535 C710,575 480,595 545,655 C590,700 520,735 505,760"/>
 
-                    kort.innerHTML = `
-                            <h3>${rytter.navn}</h3>
-                            <p><strong>Rolle:</strong> ${rytter.rolle}</p>
-                            <p><strong>Lag:</strong> ${rytter.lag}</p>
-                            <p class="pris">Pris: ${rytter.pris} mill.</p>
-                            <p>Poeng: ${rytter.poeng}</p>
-                            <button onclick="kjopRytter(${rytter.id})">Kjøp rytter</button>
-                        `;
-                    container.appendChild(kort);
-                });
-            });
-    }
+      <!-- Pelotonen: små ryttere på vei mot mål -->
+      <g class="peloton">
+        <circle cx="700" cy="577" r="9"/>
+        <circle cx="668" cy="583" r="9"/>
+        <circle cx="690" cy="597" r="9"/>
+        <circle cx="655" cy="600" r="9"/>
+        <!-- utbryteren i gult -->
+        <circle class="utbryter" cx="782" cy="500" r="8"/>
+      </g>
+    </svg>
+  </div>
 
-    function oppdaterLagStatus() {
-        fetch('/api/lag')
-            .then(response => response.json())
-            .then(lag => {
-                document.getElementById('budsjett-visning').innerText = lag.budsjett;
+  <div class="hero-innhold">
+    <p class="etappe-merke">Juli · Frankrike · 21 etapper</p>
+    <h1>Bygg laget.<br><span class="rod">Vinn touren.</span></h1>
+    <p class="ingress">
+      13 ryttere. 100 millioner. Én sjanse til å slå kompisene dine.
+      Kjøp klatrere, spurtere og en kaptein som leverer – før touren ruller ut.
+    </p>
+    <div class="knapper">
+      <a class="knapp knapp-primar" href="lag.html">Sett opp laget ditt</a>
+      <a class="knapp knapp-sekundar" href="#slik-funker-det">Se reglene</a>
+    </div>
+  </div>
+</main>
 
-                const liste = document.getElementById('mitt-lag-liste');
-                liste.innerHTML = '';
+<section id="slik-funker-det" class="regler">
+  <h2>Slik funker det</h2>
+  <div class="regel-grid">
+    <!-- Regelkortene er stylet som startnummer -->
+    <article class="regel-kort">
+      <span class="startnummer">1</span>
+      <h3>Budsjett: 100 mill.</h3>
+      <p>Alle starter likt. Stjernene koster – finn kuppene som gir poeng per krone.</p>
+    </article>
+    <article class="regel-kort">
+      <span class="startnummer">2</span>
+      <h3>Balansert stall</h3>
+      <p>Kvoter per rolle: kapteiner, spurtere, klatrere og hjelperyttere. Ingen snarveier.</p>
+    </article>
+    <article class="regel-kort">
+      <span class="startnummer">3</span>
+      <h3>Maks 3 per lag</h3>
+      <p>Du får ikke kjøpe hele favorittlaget. Spre risikoen som en ekte sportsdirektør.</p>
+    </article>
+  </div>
+</section>
 
-                if (lag.valgteRyttere && lag.valgteRyttere.length > 0) {
-                    lag.valgteRyttere.forEach(rytter => {
-                        const li = document.createElement('li');
-                        li.className = 'lag-medlem';
-                        li.innerHTML = `${rytter.navn} (${rytter.rolle})
-                            <button class="selg-knapp" onclick="selgRytter(${rytter.id})">Selg</button>`;
-                        liste.appendChild(li);
-                    });
-                } else {
-                    liste.innerHTML = '<li>Du har ikke kjøpt noen ryttere enda.</li>';
-                }
-            });
-    }
-
-    function kjopRytter(rytterId) {
-        fetch('/api/lag/kjop?id=' + rytterId, { method: 'POST' })
-            .then(response => response.text())
-            .then(melding => {
-                alert(melding);
-                oppdaterLagStatus();
-            });
-    }
-
-    function selgRytter(rytterId) {
-        fetch('/api/lag/ryttere/' + rytterId, { method: 'DELETE' })
-            .then(response => response.text())
-            .then(melding => {
-                alert(melding);
-                oppdaterLagStatus();
-            });
-    }
-</script>
+<footer>
+  <p>TourManager er et uoffisielt hobbyprosjekt og er ikke tilknyttet ASO eller Tour de France.</p>
+</footer>
 
 </body>
 </html>
